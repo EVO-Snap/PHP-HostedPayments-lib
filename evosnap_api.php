@@ -669,7 +669,7 @@ class EvoSnapApi
 	 * @return mixed the token.
 	 */
 	public static function processTokenOrder($id, $order, $cfg, $delegate = null){
-		$aPost = EvoSnapApi::getEvoSnapProcessTokenOrderPost($id, $order, $cfg->code, $cfg->key);
+		$aPost = EvoSnapApi::getEvoSnapProcessTokenOrderPost($id, $order, $cfg->code, $cfg->key, $delegate);
 		$token = EvoSnapTools::callEvoSnap($aPost, $cfg->getUrl(false), $cfg->environment);
 		if (EvoSnapApi::checkResult($token)) {
 			return $token;
