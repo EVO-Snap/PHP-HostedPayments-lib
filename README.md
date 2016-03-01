@@ -17,7 +17,7 @@ Below is an "composer.json" example file that will download the library:
         }
     ],
     "require": {
-        "evo/hosted-payments": "1.0.0"
+        "evo/hosted-payments": "1.0.1"
     }
 }
 ```
