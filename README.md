@@ -13,7 +13,7 @@ Below is an "composer.json" example file that will download the library:
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/EVO-Snap/evohostedpayments"
+            "url": "https://github.com/EVO-Snap/PHP-HostedPayments-lib"
         }
     ],
     "require": {
