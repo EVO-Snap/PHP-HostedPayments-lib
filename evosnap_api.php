@@ -664,9 +664,11 @@ class EvoSnapApi
 	 * @param string $id the token ID.
 	 * @param SnapOrder $order the order.
 	 * @param HostedPayments $cfg Hosted Payments Configuration.
+	 * @param string $delegate (optional) parent or child merchant
+	 * code delegated to collect the processed payment.
 	 * @return mixed the token.
 	 */
-	public static function processTokenOrder($id, $order, $cfg){
+	public static function processTokenOrder($id, $order, $cfg, $delegate = null){
 		$aPost = EvoSnapApi::getEvoSnapProcessTokenOrderPost($id, $order, $cfg->code, $cfg->key);
 		$token = EvoSnapTools::callEvoSnap($aPost, $cfg->getUrl(false), $cfg->environment);
 		if (EvoSnapApi::checkResult($token)) {
@@ -674,7 +676,7 @@ class EvoSnapApi
 		}
 	}
 	
-	private static function getEvoSnapProcessTokenOrderPost($id, $order, $code, $key){
+	private static function getEvoSnapProcessTokenOrderPost($id, $order, $code, $key, $delegate){
 		$aOrder = array(
 			'merchant_order_id' => EvoSnapTools::getString($order->id, 255),
 			'total_subtotal' => EvoSnapTools::getNumber($order->total_subtotal),
@@ -702,6 +704,7 @@ class EvoSnapApi
             'merchant_token_id' => $id,
             'token_order' => $aOrder,
             'token_order_item' => $aOrderLines,
+            'delegate' => $delegate,
             'return' => 'json'
         );
         

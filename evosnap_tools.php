@@ -32,6 +32,12 @@
 
 class EvoSnapTools
 {
+    
+    private static $ISO_LANGS = array(
+        'es' => 'SPA',
+        'fr' => 'FRA',
+        'pt' => 'PRT'
+    );
 
 	/**
 	 * Calls EVO Snap* Hosted Payments Service
@@ -196,15 +202,13 @@ class EvoSnapTools
 	 * @return string EVO Snap* language code.
 	 */
 	public static function getLanguage($iso_language){
-		$result = 'ENG'; //Default English
-		
-		//By now, only Spanish supported.
-		// TODO Change the way the language is selected as the number
-		// of languages increases
-		if(isset($iso_language) && $iso_language == 'es'){
-			$result = 'SPA';
-		}
-		
+		$result = 'ENG'; // Default English
+                             
+        if(isset($iso_language) &&
+            array_key_exists($iso_language, EvoSnapTools::$ISO_LANGS)){
+            $result = EvoSnapTools::$ISO_LANGS[$iso_language];
+        }
+				
 		return $result;
 	}
 	
